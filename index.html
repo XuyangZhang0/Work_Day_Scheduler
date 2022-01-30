@@ -18,20 +18,14 @@
     <h1 class="display-3">Work Day Scheduler</h1>
     <p class="lead">A simple calendar app for scheduling your work day</p>
     <p id="currentDay" class="lead"></p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customization-modal">
+      <i class="fas fa-cog"></i>
+    </button>
+    
   </header>
   <div class="container" id="planner-view">
     <!-- Timeblocks go here -->
-    <!-- <div class="row">
-      <div class="hour col-1">9AM</div>
-      <div class="time-block col-10 past"></div>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div> -->
-
-    <!-- <div class="row form-group">
-      <label for="description16" class="hour col-1">4PM</label>
-      <input type="text" class="description time-block col-10 future" id="description16" name="description16">
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div> -->
+    
 
     <!-- <div class="row time-block">
       <div class="hour col-1">
@@ -39,69 +33,44 @@
       </div>
       <textarea class="form-control description col-10 text-left past" id="description16"></textarea>
       <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">10</label>
-      </div>
-      <textarea class="form-control description col-10 text-left past" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">11</label>
-      </div>
-      <textarea class="form-control description col-10 text-left present" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">12</label>
-      </div>
-      <textarea class="form-control description col-10 text-left present" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">13</label>
-      </div>
-      <textarea class="form-control description col-10 text-left future" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">14</label>
-      </div>
-      <textarea class="form-control description col-10 text-left future" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">15</label>
-      </div>
-      <textarea class="form-control description col-10 text-left future" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">16</label>
-      </div>
-      <textarea class="form-control description col-10 text-left future" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
-    </div>
-    <div class="row time-block">
-      <div class="hour col-1">
-        <label for="description16">17</label>
-      </div>
-      <textarea class="form-control description col-10 text-left future" id="description16"></textarea>
-      <button type="button" class="btn col-1 saveBtn"><i class="fas fa-save"></i></button>
     </div> -->
+ 
     
 
   </div>
 
+  <div class="modal" id="customization-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Customize Business Hours</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="business-hour-start">Business Hour Start</label>
+              <input type="number" class="form-control" id="business-hour-start" min="0" max="23">
+            </div>
+            <div class="form-group">
+              <label for="business-hour-end">Business Hour End</label>
+              <input type="number" class="form-control" id="business-hour-end" min="1" max="24">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="save-customization">Save Customization</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </body>
 
