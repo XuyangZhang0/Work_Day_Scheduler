@@ -11,9 +11,6 @@ let calendarEvent = {
     description: ""
 }
 
-// Get current day, output to Jumbotron
-$("#currentDay").text(moment().format('dddd [, ] MMM Do YYYY'));
-
 //Show Today Planner
 function showTodayPlanner() {
     for (let i = businessHourStart; i < businessHourEnd; i++) {
@@ -33,16 +30,12 @@ function showTodayPlanner() {
     <button type="button" class="btn col-1 saveBtn" id="saveBtn${i}" data-buttonid="${i}"><i class="fas fa-save" data-buttonid="${i}"></i></button>
     </div>
     `);
-        // console.log(todayEvents.filter(obj => {
-        //     return obj.hour == i;
-        // }))
         let hourlyEvent = todayEvents.filter(obj => {
             return obj.hour == i;
         })
-if (hourlyEvent.length!==0){
-    
-}
-
+        if (hourlyEvent.length !== 0) {
+            $(".row").find(`[data-descriptionid="${i}"]`).text(hourlyEvent[0].description);
+        }
     }
 }
 
@@ -56,11 +49,6 @@ function getCurrentHour() {
     return parseInt(moment().format("H"));
 }
 
-
-//Read from localStorage
-
-
-
 //Save to local storage on button click
 $("#planner-view").click(function (event) {
 
@@ -69,7 +57,12 @@ $("#planner-view").click(function (event) {
         calendarEvent.day = selectedDay;
         calendarEvent.hour = element.dataset.buttonid;
         calendarEvent.description = $(".row").find(`[data-descriptionid="${calendarEvent.hour}"]`).val();
-        calendarEvents.push(calendarEvent);
+        if (todayEvents.filter(obj => { return obj.hour == calendarEvent.hour }).length === 0) {
+            calendarEvents.push(calendarEvent);
+            console.log("0 event, so pushed the update");
+        } else {
+            todayEvents.filter(obj => { return obj.hour == calendarEvent.hour })[0].description = $(".row").find(`[data-descriptionid="${calendarEvent.hour}"]`).val();
+        }
         localStorage.setItem("calendarEvents", JSON.stringify(calendarEvents));
     }
 });
@@ -85,22 +78,23 @@ $("#save-customization").click(function () {
     showTodayPlanner();
 });
 
-
 //Read from localstorage to find current day's events array
 function getTodayEvents() {
-    todayEvents = calendarEvents.filter(obj => {
-        return obj.day === selectedDay;
-    })
+    if (calendarEvents !== null) {
+        todayEvents = calendarEvents.filter(obj => {
+            return obj.day === selectedDay;
+        })
+    }
+
 }
-// https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
-//Save Event on button click
-
-
-
 
 //Initialization
+$("#currentDay").text(moment().format('dddd [, ] MMM Do YYYY'));
 businessHourStart = parseInt(localStorage.getItem("business-hour-start"));
 businessHourEnd = parseInt(localStorage.getItem("business-hour-end"));
 calendarEvents = JSON.parse(localStorage.getItem("calendarEvents"));
+if (calendarEvents == null) {
+    calendarEvents = [];
+}
 getTodayEvents();
 showTodayPlanner();
